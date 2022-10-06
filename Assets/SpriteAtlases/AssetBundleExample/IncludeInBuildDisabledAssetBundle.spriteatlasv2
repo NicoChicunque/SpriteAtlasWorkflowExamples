@@ -7,7 +7,7 @@ SpriteAtlasAsset:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_MasterAtlas: {fileID: 100100200, guid: 503ddb82a9c2dd245a4c3de8c5ae81c8, type: 3}
+  m_MasterAtlas: {fileID: 0}
   m_ImporterData:
     serializedVersion: 2
     textureSettings:
@@ -43,11 +43,10 @@ SpriteAtlasAsset:
       enableTightPacking: 1
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
-    variantMultiplier: 0.5
+    variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: eda2a1250c2838d4c8e62af7059b822b, type: 3}
-    - {fileID: 102900000, guid: 3416262955da54622a64e184a009b8e1, type: 3}
     bindAsDefault: 0
     isAtlasV2: 1
     cachedData: {fileID: 0}
-  m_IsVariant: 1
+  m_IsVariant: 0

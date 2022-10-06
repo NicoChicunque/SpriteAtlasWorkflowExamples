@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ public class DropdownSpriteAtlases : MonoBehaviour
 
     void Start()
     {
-        GetComponent<TMP_Dropdown>().onValueChanged.AddListener(
+        GetComponent<Dropdown>().onValueChanged.AddListener(
             (indexAtlas) =>
             {
                 for (int i = 0; i < images.Count; i++)
