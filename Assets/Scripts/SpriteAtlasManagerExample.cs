@@ -3,12 +3,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.Networking;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AddressableAssets;
 
 public class SpriteAtlasManagerExample : MonoBehaviour
 {
-    enum LoadOption { ResourcesFolderSpriteAtlas, LocalFolderAssetBundle, HostFolderAssetBundle };
+    enum LoadOption { ResourcesFolderSpriteAtlas, LocalFolderAssetBundle, HostFolderAssetBundle, AddressableByAddress };
     [SerializeField] private LoadOption loadOption = LoadOption.HostFolderAssetBundle;
-    [SerializeField] private string bundleName = "includeinbuilddisabled";
+    [SerializeField] private string bundleName = "includeinbuilddisabled", spriteAtlasAddress = string.Empty;
+    private AsyncOperationHandle<SpriteAtlas> spriteAtlasOperation;   
 
     void OnEnable()
     {
@@ -23,12 +26,10 @@ public class SpriteAtlasManagerExample : MonoBehaviour
     private void AtlasRequested(string tag, Action<SpriteAtlas> callback)//https://docs.unity3d.com/Manual/MethodDistribution.html
     {
         Debug.Log(tag + " Sprite Atlas Requested");
-        SpriteAtlas spriteAtlas = null;
 
         if (loadOption == LoadOption.ResourcesFolderSpriteAtlas)//Load Sprite Atlases from Resources folder 
         {
-            spriteAtlas = Resources.Load<SpriteAtlas>(tag);
-            callback(spriteAtlas);
+            callback(Resources.Load<SpriteAtlas>(tag));
             return;
         }
 
@@ -36,21 +37,41 @@ public class SpriteAtlasManagerExample : MonoBehaviour
         if (loadOption == LoadOption.LocalFolderAssetBundle)//Load Sprite Atlases as AssetBundle from Local folder
         {
             AssetBundle bundle = AssetBundle.LoadFromFile("C:/xampp/htdocs/AssetBundles/" + bundleName);
-            spriteAtlas = bundle.LoadAsset<SpriteAtlas>(tag);
-            callback(spriteAtlas);
+            if (bundle == null)
+            {
+                Debug.LogError("Can't get spriteatlas assetbundle with the option " + loadOption);
+                return;
+            }
+            callback(bundle.LoadAsset<SpriteAtlas>(tag));
+            bundle.Unload(false);
             return ;
         }
 
-        //Load Sprite Atlases as AssetBundle from Host folder
-        StartCoroutine(GetHostedAssetBundle((assetBundle) => {
-            if (assetBundle == null)
+        if (loadOption == LoadOption.HostFolderAssetBundle)//Load Sprite Atlases as AssetBundle from Host folder
+        {
+            StartCoroutine(GetHostedAssetBundle((bundle) =>
             {
-                Debug.Log("Can't get spriteatlas assetbundle with the option " + loadOption);
+                if (bundle == null)
+                {
+                    Debug.LogError("Can't get spriteatlas assetbundle with the option " + loadOption);
+                    return;
+                }
+                callback(bundle.LoadAsset<SpriteAtlas>(tag));
+            }));
+            return;
+        }
+
+        //Load Sprite Atlases AddressableByAddress
+        spriteAtlasOperation = Addressables.LoadAssetAsync<SpriteAtlas>(spriteAtlasAddress);
+        spriteAtlasOperation.Completed += (operation) =>
+        {
+            if (operation.Status.Equals(AsyncOperationStatus.Succeeded))
+            {
+                callback(operation.Result);
                 return;
             }
-            spriteAtlas = assetBundle.LoadAsset<SpriteAtlas>(tag);
-            callback(spriteAtlas);
-        }));
+            Debug.LogError("Sprite load failed. Using default sprite.");
+        };
     }
 
     IEnumerator GetHostedAssetBundle(Action<AssetBundle> onGetAssetBundle)
@@ -63,6 +84,15 @@ public class SpriteAtlasManagerExample : MonoBehaviour
             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
             onGetAssetBundle(bundle);            
             bundle.Unload(false);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (spriteAtlasOperation.IsValid())
+        {
+            Addressables.Release(spriteAtlasOperation);
+            Debug.Log("Successfully released atlasOperation.");
         }
     }
 }

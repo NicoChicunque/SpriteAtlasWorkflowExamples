@@ -14,7 +14,6 @@ public class SpriteTextureBundleLoader : MonoBehaviour
     {
         //Load Sprite Atlases as AssetBundle from Host folder
         StartCoroutine(GetHostedAssetBundle((assetBundle) => {
-            Debug.Log("SpriteTextureBundleLoader " + assetBundle);
             if (assetBundle == null)
             {
                 Debug.Log("Can't get assetbundle");

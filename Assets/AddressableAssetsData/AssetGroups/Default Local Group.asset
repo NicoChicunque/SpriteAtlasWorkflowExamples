@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c8bba1134fa8bd147a3b7e95a01bc7c2
+  m_SerializeEntries:
+  - m_GUID: 0b9bdf7393249414cbeba11b59f2f99e
+    m_Address: Assets/SpriteAtlases/AddressableExample/IncludeInBuildDisabledAddressable.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 503ddb82a9c2dd245a4c3de8c5ae81c8
+    m_Address: Assets/SpriteAtlases/AssetBundleExample/IncludeInBuildEnabledAssetBundle.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 72295cfcac6bdff47bc0534259ac8935, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 73403fea65a375c4786e60fb1fed0a88, type: 2}
+    - {fileID: 11400000, guid: 78ee2b4cf68250b429181105cecfaa4d, type: 2}
