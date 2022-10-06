@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.Networking;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class SpriteAtlasManagerExample : MonoBehaviour
 {

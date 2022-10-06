@@ -896,7 +896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a4b40b1e9d71845916be453e5aa34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleName: 
+  bundleName: otherui
+  spriteName: HotDog
 --- !u!1 &763293970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,10 +1480,11 @@ MonoBehaviour:
   m_Text: "Ejercicio 1:\nCargar SpritesAtlas de AssetBundles  con Include in Build 
     y <color=cyan>sin Include in Build\r</color>\n<color=lime>Verificar el contenido
     del Asset Bundle en ambos casos para ver si el atlas esta incluido o no.\r</color>\n<color=cyan>Cargar
-    una interfaz UI desde el Asset Bundle con LateBinding</color>\n\nEjercicio 2:\r\nUna
+    una interfaz UI desde el Asset Bundle con LateBinding</color>\n\nEjercicio 2:\r\n<color=cyan>Una
     parte de la interfaz debera estar en la escena y otra parte en exportada / Cargarda
-    desde el bundle.\r\nRevisar nuevamente si el Atlas esta en el player build ,
-    en el bundle build o en ambos"
+    desde el bundle.\r</color>\n<color=lime>Revisar nuevamente si el Atlas esta en
+    el player build , en el bundle build o en ambos</color>\n\nEjercicio 3.\r\nCargar
+    la interfaz desde Addressables en lugar de Asset Bundles"
 --- !u!222 &1227047167
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1676,7 +1678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d3ccb3ded6dee448051c53adddb9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadOption: 0
+  loadOption: 2
   bundleName: includeinbuilddisabled
 --- !u!4 &1703593247
 Transform:
@@ -1782,7 +1784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a4b40b1e9d71845916be453e5aa34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleName: 
+  bundleName: otherui
+  spriteName: Boy
 --- !u!1 &1820637339
 GameObject:
   m_ObjectHideFlags: 0
