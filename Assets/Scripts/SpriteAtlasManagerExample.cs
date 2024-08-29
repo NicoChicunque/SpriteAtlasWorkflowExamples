@@ -2,16 +2,15 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
-using UnityEngine.Networking;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.AddressableAssets;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SpriteAtlasManagerExample : MonoBehaviour
 {
-    enum LoadOption { ResourcesFolderSpriteAtlas, LocalFolderAssetBundle, HostFolderAssetBundle, AddressableByAddress };
-    [SerializeField] private LoadOption loadOption = LoadOption.HostFolderAssetBundle;
-    [SerializeField] private string bundleName = "includeinbuilddisabled", spriteAtlasAddress = string.Empty;
-    private AsyncOperationHandle<SpriteAtlas> spriteAtlasOperation;   
+    [SerializeField] string _bundleName = "includeinbuilddisabled";
+    [SerializeField] SpriteAtlas _spriteAtlas;
+    [SerializeField] List<Sprite> _sprites = new List<Sprite>();
+    [SerializeField] Image _image;
 
     void OnEnable()
     {
@@ -23,76 +22,47 @@ public class SpriteAtlasManagerExample : MonoBehaviour
         SpriteAtlasManager.atlasRequested -= AtlasRequested;
     }
 
-    private void AtlasRequested(string tag, Action<SpriteAtlas> callback)//https://docs.unity3d.com/Manual/MethodDistribution.html
+    void AtlasRequested(string tag, Action<SpriteAtlas> callback)
     {
-        Debug.Log(tag + " Sprite Atlas Requested");
-
-        if (loadOption == LoadOption.ResourcesFolderSpriteAtlas)//Load Sprite Atlases from Resources folder 
+        Debug.Log("Some sprite requires its atlas with tag: " + tag);
+        if (_spriteAtlas == null)
         {
-            callback(Resources.Load<SpriteAtlas>(tag));
-            return;
+            Debug.Log("Save the scene here ??? ... After the customer could check to release the desired assets");
+            StartCoroutine(LoadFromStreammingAsset(tag, callback));
         }
-
-        //https://docs.unity3d.com/Manual/AssetBundles-Workflow.html
-        if (loadOption == LoadOption.LocalFolderAssetBundle)//Load Sprite Atlases as AssetBundle from Local folder
+        else
         {
-            AssetBundle bundle = AssetBundle.LoadFromFile("C:/xampp/htdocs/AssetBundles/" + bundleName);
-            if (bundle == null)
-            {
-                Debug.LogError("Can't get spriteatlas assetbundle with the option " + loadOption);
-                return;
-            }
-            callback(bundle.LoadAsset<SpriteAtlas>(tag));
-            bundle.Unload(false);
-            return ;
-        }
-
-        if (loadOption == LoadOption.HostFolderAssetBundle)//Load Sprite Atlases as AssetBundle from Host folder
-        {
-            StartCoroutine(GetHostedAssetBundle((bundle) =>
-            {
-                if (bundle == null)
-                {
-                    Debug.LogError("Can't get spriteatlas assetbundle with the option " + loadOption);
-                    return;
-                }
-                callback(bundle.LoadAsset<SpriteAtlas>(tag));
-            }));
-            return;
-        }
-
-        //Load Sprite Atlases AddressableByAddress
-        spriteAtlasOperation = Addressables.LoadAssetAsync<SpriteAtlas>(spriteAtlasAddress);
-        spriteAtlasOperation.Completed += (operation) =>
-        {
-            if (operation.Status.Equals(AsyncOperationStatus.Succeeded))
-            {
-                callback(operation.Result);
-                return;
-            }
-            Debug.LogError("Sprite load failed. Using default sprite.");
-        };
-    }
-
-    IEnumerator GetHostedAssetBundle(Action<AssetBundle> onGetAssetBundle)
-    {
-        string url = "http://localhost/AssetBundles/" + bundleName;
-        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url, 0);
-        yield return request.SendWebRequest();
-        if (request.error == null)
-        {
-            AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-            onGetAssetBundle(bundle);            
-            bundle.Unload(false);
+            callback(_spriteAtlas);
         }
     }
 
-    void OnDestroy()
+    IEnumerator LoadFromStreammingAsset(string tag, Action<SpriteAtlas> callback)
     {
-        if (spriteAtlasOperation.IsValid())
+        AssetBundleCreateRequest bundleLoadRequest = AssetBundle.LoadFromFileAsync(Application.streamingAssetsPath + "/AssetBundles/" + _bundleName);
+        yield return bundleLoadRequest;
+        AssetBundle bundle = bundleLoadRequest.assetBundle;
+
+        if (bundle == null)
         {
-            Addressables.Release(spriteAtlasOperation);
-            Debug.Log("Successfully released atlasOperation.");
+            Debug.Log("Failed to load AssetBundle!");
+            yield break;
         }
+
+        AssetBundleRequest request = bundle.LoadAssetAsync(tag);
+        yield return request;
+        _spriteAtlas = request.asset as SpriteAtlas;
+
+        if(_spriteAtlas == null)
+        {
+            Debug.Log("Failed to load sprite atlas asset!");
+            yield break;
+        }
+
+        Sprite[] sprites = new Sprite[_spriteAtlas.spriteCount];
+        _spriteAtlas.GetSprites(sprites);
+        _sprites = new List<Sprite>(sprites);
+        _image.sprite = _sprites[1];
+        callback(_spriteAtlas);
+        Debug.Log("Sprite Atlas Loaded");
     }
 }

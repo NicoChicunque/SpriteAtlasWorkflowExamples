@@ -16,15 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c8bba1134fa8bd147a3b7e95a01bc7c2
-  m_SerializeEntries:
-  - m_GUID: 0b9bdf7393249414cbeba11b59f2f99e
-    m_Address: Assets/SpriteAtlases/AddressableExample/IncludeInBuildDisabledAddressable.spriteatlas
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 503ddb82a9c2dd245a4c3de8c5ae81c8
-    m_Address: Assets/SpriteAtlases/AssetBundleExample/IncludeInBuildEnabledAssetBundle.spriteatlasv2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 72295cfcac6bdff47bc0534259ac8935, type: 2}
   m_SchemaSet:

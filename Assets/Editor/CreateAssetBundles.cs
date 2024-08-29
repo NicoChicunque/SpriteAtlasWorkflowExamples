@@ -1,12 +1,13 @@
 using UnityEditor;
 using System.IO;
+using UnityEngine;
 
 public class CreateAssetBundles
 {
     [MenuItem("Assets/BuildAllAssetBundles")]
     static void BuildAllAssetBundles()
     {
-        string assetBundleDirectory = "C:/xampp/htdocs/AssetBundles";
+        string assetBundleDirectory = Application.streamingAssetsPath + "/AssetBundles";
         if ( ! Directory.Exists(assetBundleDirectory))
         {
             Directory.CreateDirectory(assetBundleDirectory);
