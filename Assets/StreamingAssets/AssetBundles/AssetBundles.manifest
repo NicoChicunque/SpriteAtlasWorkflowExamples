@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 1983706131
+CRC: 1117945081
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: includeinbuilddisabled
+      Name: spriteatlas1
+      Dependencies: {}
+    Info_1:
+      Name: spriteatlas2
       Dependencies: {}

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3628460078
+CRC: 3589743546
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6ccc6a15385fe12803dc8135702d4186
+    Hash: 170cd71762958fbfec826b45aa688930
   TypeTreeHash:
     serializedVersion: 2
     Hash: 033fafe2c9f6c610c3a734393882fd4c
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 6ccc6a15385fe12803dc8135702d4186
+    Hash: 170cd71762958fbfec826b45aa688930
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -20,5 +20,5 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/SpriteAtlases/AssetBundleExample/SpriteAtlasNotIncludeInBuild.spriteatlas
+- Assets/SpriteAtlases/AssetBundleExample/SpriteAtlas 2.spriteatlas
 Dependencies: []
