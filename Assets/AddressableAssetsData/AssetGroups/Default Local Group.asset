@@ -17,17 +17,33 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c8bba1134fa8bd147a3b7e95a01bc7c2
   m_SerializeEntries:
-  - m_GUID: 0b9bdf7393249414cbeba11b59f2f99e
-    m_Address: Assets/SpriteAtlases/AddressableExample/IncludeInBuildDisabledAddressable.spriteatlas
+  - m_GUID: 0fc53ad8e877049c3aef54a3f8a1e01a
+    m_Address: Assets/Textures/UI/Cursors/Cursor_A.png
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 503ddb82a9c2dd245a4c3de8c5ae81c8
-    m_Address: Assets/SpriteAtlases/AssetBundleExample/IncludeInBuildEnabledAssetBundle.spriteatlasv2
+    m_SerializedLabels:
+    - HD
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 860d63a1df61a374bb4e688955c22e5c
+    m_Address: Assets/Textures/UI/Characters/Werewolf.png
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SD
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b54af6a8f00f55f409935ecfef9e5607
+    m_Address: Assets/Textures/UI/Characters/Knight.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SD
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3c815d95da3a483385620d7bd8fc545
+    m_Address: Assets/Textures/UI/Cursors/Cursor_B.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - HD
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 72295cfcac6bdff47bc0534259ac8935, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 73403fea65a375c4786e60fb1fed0a88, type: 2}
     - {fileID: 11400000, guid: 78ee2b4cf68250b429181105cecfaa4d, type: 2}
+    - {fileID: 11400000, guid: 73403fea65a375c4786e60fb1fed0a88, type: 2}
